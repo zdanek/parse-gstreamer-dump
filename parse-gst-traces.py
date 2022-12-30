@@ -114,7 +114,7 @@ def main():
   for tsb, tfs in sorted(tr.items(), key=operator.itemgetter(0)):
     cnt +=1
     first = prev = string_to_time(tfs[0][0])    # get the time of the first item in tfs
-    print "\n*** Frame no: %d, timestamp: %s" % (cnt, tsb)
+    print ("\n*** Frame no: %d, timestamp: %s" % (cnt, tsb))
 
     # iterate over the tfs list, el is the tuple
     for el in tfs:
@@ -123,11 +123,11 @@ def main():
         later = "(%6d us later)" % (cur - prev).microseconds
       else:
         later = "(    first event)"
-      print "At %s %s %s" % (el[0][0:14], later, el[1])
+      print ("At %s %s %s" % (el[0][0:14], later, el[1]))
       prev = cur
    
     total = cur - first
-    print "*** Total: %6d us" % (total.microseconds)
+    print ("*** Total: %6d us" % (total.microseconds))
 
     # Collect average stats
     if total.microseconds > 0:
@@ -141,7 +141,7 @@ def main():
         start = string_to_time(tfs[0][0])  # expect only 2 entries in the list, 1st is start
         stop = string_to_time(tfs[1][0])   # 2nd is stop
         filt_time = stop - start
-        print "%s time %s us" % (tfs[0][1], filt_time.microseconds)
+        print ("%s time %s us" % (tfs[0][1], filt_time.microseconds))
         if filt_time.microseconds > 0:
           filt_count[elem] += 1
           filt_avg[elem] += filt_time.microseconds
@@ -149,13 +149,13 @@ def main():
 
   # Display the totals
   if (total_count > 0):
-    print "\n=-= Average: %6d us on %d frames" % (avg / total_count, total_count)
+    print ("\n=-= Average: %6d us on %d frames" % (avg / total_count, total_count))
   else:
-    print "\n=-= No valid frames"
+    print ("\n=-= No valid frames")
 
   for elem in filt_count:
     if (filt_count[elem] > 0):
-      print "=-= %s: %6d us on %d frames" % (filt_name[elem], filt_avg[elem] / filt_count[elem], filt_count[elem])
+      print ("=-= %s: %6d us on %d frames" % (filt_name[elem], filt_avg[elem] / filt_count[elem], filt_count[elem]))
 
   return 0
 
